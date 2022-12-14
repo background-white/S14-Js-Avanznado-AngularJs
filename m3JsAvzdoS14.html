@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <title>| S14 | AngularJs | Ejercicios |</title>
+</head>
+<body style="background-color:aquamarine;">
+
+  <img src="./descuento.png" alt="descuento del salario">
+  <hr>
+  <div ng-app="yametekudasai" ng-controller="formCtrl">
+    <form novalidate>
+      <!--input ID-->
+      <label>ID:</label>
+      <input type="number" ng-model="id" placeholder="Ingresa tu ID aquí">
+      <hr>
+
+      <!--input horas trabajadas-->
+      <label>Horas trabajadas:</label>
+      <input type="number" ng-model="horas" placeholder="Ingresa horas trabajadas">
+      <hr>
+
+      <!--input tarifa por hora-->
+      <label>Tarifa por hora trabajada:</label>
+      <input type="number" ng-model="tarifa" placeholder="Ingresa tarifa por hora">
+      <hr>
+      
+    </form>
+    <h1>Hello Kevin, tu id es: {{id}} !</h1>
+
+    <!--Se muestra el salario bruto, descuento y salario neto-->
+    <h2>Tu salario bruto es de: {{bruto1()}} soles</h2>
+    <h2>El descuento que te corresponde es de: {{descuento()}}</h2>
+    <h2>Tu salario neto es de: {{bruto1()-descuento()}}</h2>
+  </div>
+
+<script>
+  let app = angular.module('yametekudasai', [])
+  app.controller("formCtrl",function($scope){
+
+    //Calcular salario bruto//
+    $scope.bruto1=function(){return $scope.horas*$scope.tarifa} 
+    
+
+    //verificar de cuanto es el descuento//
+    $scope.descuento=function(){
+      $scope.bruto2=$scope.horas*$scope.tarifa
+      if($scope.bruto2<=500){
+        return 0
+      }else if($scope.bruto2>500&&$scope.bruto2<=1000){
+        return $scope.bruto2*.02
+      }else if($scope.bruto2>1000&&$scope.bruto2<=4000){
+        return $scope.bruto2*.08
+      }else if($scope.bruto2>4000&&$scope.bruto2<=8000){
+        return $scope.bruto2*.15
+      }else if($scope.bruto2>8000&&$scope.bruto2<=10000){
+        return $scope.bruto2*.21
+      }else if($scope.bruto2>10000){
+        return $scope.bruto2*.3
+      }else{
+        return "incorrecto"
+      }
+    }
+
+  });
+</script>
+
+</body>
+</html>
